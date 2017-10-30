@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>ITS ME</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				font-family: Monospace;
+				background-color: #000;
+				color: #fff;
+				margin: 0px;
+				overflow: hidden;
+			}
+			#overlay {
+				position:fixed;
+				width:100%;
+				height:100%;
+				z-index:10;
+				padding:10% 25%;
+				background-color: #000;
+			}
+
+			#txt {
+				color:#444444;
+				width:50%;
+				height:80%;
+				vertical-align: middle;
+				font-family: "Courier New",Courier,"Lucida Sans Typewriter","Lucida Typewriter",monospace;
+			}
+			#txt h1 {
+				color:#fff;
+				font-size:42px;
+			}
+			#desc {
+				color: #aaaaaa;
+			}
+		</style>
+	</head>
+
+		<div id = "overlay">
+			<div id="txt">
+				<h1>SCHENLEYDAY SIMULATOR 2017</h1>
+				<h2 id="desc">A </h2>
+				please, find yourself some soundballs<br>
+				press enter to come again on a different day <br>
+				press space to toggle your eyes
+			</div>
+		</div>
+	<body>
+
+		<script src="three.js-dev/build/three.js"></script>
+		<script src="three.js-dev/examples/js/loaders/DDSLoader.js"></script>
+		<script src="three.js-dev/examples/js/loaders/MTLLoader.js"></script>
+		<script src="three.js-dev/examples/js/loaders/OBJLoader.js"></script>
+		<script src="three.js-dev/examples/js/controls/FirstPersonControls.js"></script>
+		<script src="three.js-dev/examples/js/Detector.js"></script>
+		<script src="three.js-dev/examples/js/libs/dat.gui.min.js"></script>
+		<script src="THREEFPS.js"></script>
+		<script src="audioPTS.js"></script>
+		<!-- general keypress -->
+		<script type="text/javascript">
+			var overlay = document.getElementById("overlay");
+			document.onkeypress = function (e) {
+			    if (event.keyCode == 32 && pts.type !="undefined") {
+			        if (overlay.style.zIndex =="10" ) { 
+			        	overlay.style.zIndex = "-10";
+			        }else {
+			        	overlay.style.zIndex = "10";
+			    	}
+				}else if (event.keyCode == 13 && pts.type !="undefined") {
+			        for (i=0;i<sources.length;i++) {
+						scene.remove(sources[i]);
+					}
+						scapeIt(sounds,pts);
+						reDesc();
+				}
+			};
+		</script>
+		<!-- Desc generator, hardcoded ofc you know me -->
+		<script type="text/javascript">
+			var descs = ["A LOVELY MORNING",
+						 "THE WORST MORNING YOU'VE HAD YET",
+						 "I THINK I SAW A GHOST OR SOMETHING",
+						 "WEIRD BUG ON A TREE",
+						 "DON'T TALK TO ME TIL I'VE HAD MY COFFEE :)",
+						 "NOBODY IS AWAKE AT THIS TIME WHY AM I HERE AND WHY ARE SO MANY OTHERS ALSO HERE",
+						 "I THINK I SAW SOMETHING REALLY QUITE WEIRD AND TO PREVENT MYSELF FROM HAVING TO RECALCULATE MY WORLDVIEW I'M GONNA WALK REAL FAST",
+						 "WHY DON'T THEY HAVE CORGICON HERE :(",
+						 "IT WAS RAINY LAST NIGHT AND SO THEREFORE MUD HAS GOTTEN IN PLACES IT SHOULDN'T HAVE",
+						 "I'VE GOT AUDIO RECORDING EQUIPMENT TODAY AND I'M HERE TO STEAL YOUR CONVERSATIONS IF YOU HAVE ANY",
+						 "THE REAL CRIME WAS INSIDE YOU ALL ALONG. ENSUE HYPERACTIVE IMAGINATION",
+						 "DOGS!!! D O G S ! ! ! !"];
+			function reDesc () {
+				var rand = Math.floor(Math.random() * descs.length);
+				document.getElementById("desc").innerHTML = descs[rand];
+			}
+
+			reDesc();
+		</script>
+	</body>
+
+</html>
